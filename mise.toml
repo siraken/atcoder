@@ -1,0 +1,29 @@
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+BUILD_DIR = "{{ config_root }}/build"
+
+[tools]
+cmake = "latest"
+make = "latest"
+
+[tasks.build]
+description = "Build the project"
+alias = "b"
+run = "cd $BUILD_DIR && make"
+
+[tasks.clean]
+description = "Clean the build directory"
+alias = "c"
+run = "rm -rf $BUILD_DIR"
+
+[tasks.run]
+alias = "r"
+description = "Run the application"
+run = "$BUILD_DIR/bin/$PROJECT_NAME"
+
+[tasks.info]
+description = "Print project information"
+run = '''
+echo "Project: $PROJECT_NAME"
+echo "Build Directory: $BUILD_DIR"
+'''
